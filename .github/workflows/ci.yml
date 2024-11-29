@@ -1,26 +1,40 @@
-name: Node.js CI
+name: Update README with Date and Day
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight (UTC)
+  workflow_dispatch:  # Allows the workflow to be manually triggered
 
 jobs:
-  build:
-
+  update-readme:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Get the current date and day
+      - name: Get current date and day
+        id: date
+        run: |
+          # Get current date and day (in UTC)
+          DATE=$(date -u "+%Y-%m-%d")
+          DAY=$(date -u "+%A")
+          echo "DATE=$DATE" >> $GITHUB_ENV
+          echo "DAY=$DAY" >> $GITHUB_ENV
+
+      # Step 3: Update README.md
+      - name: Update README.md
+        run: |
+          # Replace placeholders in README with the actual date and day
+          sed -i "s/{DATE}/${DATE}/g" README.md
+          sed -i "s/{DAY}/${DAY}/g" README.md
+          
+          # Commit changes to README.md if there are any updates
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions"
+          git add README.md
+          git commit -m "Update date and day in README" || echo "No changes"
+          git push
+
