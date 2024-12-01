@@ -2,6 +2,10 @@
 
 This repository contains a GitHub Actions workflow that automatically updates the `README.md` file with the current date and day. The update happens daily at midnight (UTC) and can also be triggered manually.
 
+## Last Update
+- **Date:** {DATE}
+- **Day:** {DAY}
+
 ## Purpose
 
 The goal of this workflow is to ensure that the `README.md` file always reflects the current date and day. This can be useful for projects that need to keep track of when the documentation was last updated or for any project where including the date and day dynamically in the README is a requirement.
