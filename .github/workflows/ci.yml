@@ -32,8 +32,9 @@ jobs:
           sed -i "s/{DAY}/${DAY}/g" README.md
           
           # Commit changes to README.md if there are any updates
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}
           git add README.md
           git commit -m "Update date and day in README" || echo "No changes"
           git push
