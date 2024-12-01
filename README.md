@@ -3,8 +3,8 @@
 This repository contains a GitHub Actions workflow that automatically updates the `README.md` file with the current date and day. The update happens daily at midnight (UTC) and can also be triggered manually.
 
 ## Last Update
-- **Date:** {DATE}
-- **Day:** {DAY}
+- **Date:** 2024-12-01
+- **Day:** Sunday
 
 ## Purpose
 
@@ -14,7 +14,7 @@ The goal of this workflow is to ensure that the `README.md` file always reflects
 
 1. **Scheduled Updates**: 
    - The workflow runs daily at midnight UTC. It automatically fetches the current date and day in UTC time.
-   - The placeholders `{DATE}` and `{DAY}` in the `README.md` file are replaced with the actual date (in `YYYY-MM-DD` format) and the name of the current day (e.g., "Monday").
+   - The placeholders `2024-12-01` and `Sunday` in the `README.md` file are replaced with the actual date (in `YYYY-MM-DD` format) and the name of the current day (e.g., "Monday").
 
 2. **Manual Trigger**: 
    - The workflow can also be manually triggered via the GitHub Actions interface if you want to update the `README.md` on-demand.
